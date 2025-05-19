@@ -13,7 +13,7 @@ st.set_page_config(
         'About': "# Corso di *Basi di Dati*"
     }
 )
-st.title("ROBA HOTEL")
+st.title("Sistema Gestione Hotel")
 if "connection" not in st.session_state.keys():
     st.session_state["connection"]=False
 
