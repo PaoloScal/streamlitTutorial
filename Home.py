@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+from utils.utils import *
 
 st.set_page_config(
     page_title="La mia App",
@@ -12,4 +13,8 @@ st.set_page_config(
         'About': "# Corso di *Basi di Dati*"
     }
 )
-st.title("📈 La mia App")
+st.title("ROBA HOTEL")
+if "connection" not in st.session_state.keys():
+    st.session_state["connection"]=False
+
+check_connection()
