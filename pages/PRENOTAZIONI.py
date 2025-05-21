@@ -3,7 +3,8 @@ import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine,text
 
-st.markdown("Andamento Prenotazioni")
+st.title(":red[Andamento Prenotazioni]")
+st.markdown("Le prenotazioni effettuate fino ad ora:")
 
 if st.button("Mostra",type="primary"):
     query = "SELECT * FROM PRENOTAZIONE"
