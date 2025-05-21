@@ -11,8 +11,6 @@ def connect_db(dialect,username,password,host,dbname):
     except:
         return False
 
-def execute_query(conn,query):
-    return conn.execute(text(query))
 
 
 #Controllare se la connessione al db è stata effettuata
