@@ -13,9 +13,9 @@ query = "SELECT COUNT(DISTINCT Citta_Indirizzo) AS numCitta FROM AGENZIA"
 dato = st.session_state["connection"].execute(text(query))
 st.metric("Citta coperte:",dato.mappings().first()['numCitta'])
 
-query = "SELECT COUNT(DISTINCT CodA) AS numAgenzie FROM AGENZIA"
+query="SELECT Citta_Indirizzo,COUNT(*) AS num FROM `AGENZIA` GROUP BY Citta_Indirizzo ORDER BY `num` DESC LIMIT 1;"
 dato = st.session_state["connection"].execute(text(query))
-st.metric("Citta maggiornmente coperta:",dato.mappings().first()['bestCitta'])
+st.metric("Citta maggiornmente coperta:",dato.mappings().first()['Citta_Indirizzo'])
 
 
 
