@@ -15,11 +15,11 @@ st.set_page_config(
     }
 )
 st.sidebar.title("Benvenuto nel sistema gestione hotel")
-st.title("Sistema Gestione Hotel")
+st.title(":red[Sistema Gestione Hotel]")
 if "connection" not in st.session_state.keys():
     st.session_state["connection"]=False
 
-#st.header("Example")
-#st.image("C:\Users\Paolo\Documents\GitHub\lab6es1\streamlitTutorial\images\hotel.jpg")    
+st.header("HOTEL MEGALUSSO 3000")
+st.image("images/hotel.png")
 
 check_connection()
