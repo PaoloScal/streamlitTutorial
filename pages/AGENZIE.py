@@ -2,20 +2,22 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine,text
+from utils.utils import *
 
 st.title(":red[Agenzie dipsonibili]")
+col1,col2,col3=st.columns(3)
+if check_connection():
+    query = "SELECT COUNT(DISTINCT CodA) AS numAgenzie FROM AGENZIA"
+    dato = st.session_state["connection"].execute(text(query))
+    col1.metric("Numero Agenzie saltavete:",dato.mappings().first()['numAgenzie'])
 
-query = "SELECT COUNT(DISTINCT CodA) AS numAgenzie FROM AGENZIA"
-dato = st.session_state["connection"].execute(text(query))
-st.metric("Numero Agenzie saltavete:",dato.mappings().first()['numAgenzie'])
+    query = "SELECT COUNT(DISTINCT Citta_Indirizzo) AS numCitta FROM AGENZIA"
+    dato = st.session_state["connection"].execute(text(query))
+    col2.metric("Citta coperte:",dato.mappings().first()['numCitta'])
 
-query = "SELECT COUNT(DISTINCT Citta_Indirizzo) AS numCitta FROM AGENZIA"
-dato = st.session_state["connection"].execute(text(query))
-st.metric("Citta coperte:",dato.mappings().first()['numCitta'])
-
-query="SELECT Citta_Indirizzo,COUNT(*) AS num FROM `AGENZIA` GROUP BY Citta_Indirizzo ORDER BY `num` DESC LIMIT 1;"
-dato = st.session_state["connection"].execute(text(query))
-st.metric("Citta maggiornmente coperta:",dato.mappings().first()['Citta_Indirizzo'])
+    query="SELECT Citta_Indirizzo,COUNT(*) AS num FROM AGENZIA GROUP BY Citta_Indirizzo ORDER BY num DESC LIMIT 1;"
+    dato = st.session_state["connection"].execute(text(query))
+    col3.metric("Citta maggiornmente coperta:",dato.mappings().first()['Citta_Indirizzo'])
 
 
 
