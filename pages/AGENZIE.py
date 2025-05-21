@@ -18,11 +18,20 @@ if check_connection():
     query="SELECT Citta_Indirizzo,COUNT(*) AS num FROM AGENZIA GROUP BY Citta_Indirizzo ORDER BY num DESC LIMIT 1;"
     dato = st.session_state["connection"].execute(text(query))
     col3.metric("Citta maggiornmente coperta:",dato.mappings().first()['Citta_Indirizzo'])
+    query = "SELECT C.Nome,C.Latitudine AS LAT, C.Longitudine AS LON FROM CITTA C,AGENZIA A WHERE A.Citta_Indirizzo = C.Nome;"
+    dato = st.session_state["connection"].execute(text(query))
+    df = pd.DataFrame(dato)
+    st.map(df)
 
-
+    supercitta = st.text_input("Citta da ricercare: ", placeholder = "Roma")
+    if (supercitta == ''):
+        query = "SELECT Citta_indirizzo AS Citta,CONCAT(VIa_indirizzo,' ',Numero_Indirizzo) AS Indirizzo FROM AGENZIA"
+    else:
+        query = f"SELECT Citta_indirizzo AS Citta,CONCAT(VIa_indirizzo,' ',Numero_Indirizzo) AS Indirizzo FROM AGENZIA WHERE Citta_indirizzo = '{supercitta}'"    
+    df = pd.DataFrame(st.session_state["connection"].execute(text(query)))
+    st.table(df)
 
 st.markdown("Tutte le agenzie presenti nel database:")
-
 if st.button("Mostra",type="primary"):
     tab1,tab2 = st.tabs(["Info Generali","Collocazione geografica"])
     query = "SELECT CodA,Sitoweb,Tel FROM AGENZIA;"
