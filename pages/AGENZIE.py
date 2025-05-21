@@ -5,10 +5,9 @@ from sqlalchemy import create_engine,text
 
 st.title(":red[Agenzie dipsonibili]")
 
-query = "SELECT COUNT(DISTINCT CodA) FROM AGENZIA"
+query = "SELECT COUNT(DISTINCT CodA) AS numAgenzie FROM AGENZIA"
 dato = pd.DataFrame(st.session_state["connection"].execute(text(query)))
-count = dato.fetchone()[0] 
-st.metric("Numero Agenzie saltavete:",count)
+st.metric("Numero Agenzie saltavete:",dato.mappings().first()['numAgenzie'])
 #st.metric("Citta coperte:",0)
 #st.metric("Citta maggiornmente coperta:",0)
 
