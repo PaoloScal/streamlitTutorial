@@ -6,10 +6,16 @@ from sqlalchemy import create_engine,text
 st.title(":red[Agenzie dipsonibili]")
 
 query = "SELECT COUNT(DISTINCT CodA) AS numAgenzie FROM AGENZIA"
-dato = pd.DataFrame(st.session_state["connection"].execute(text(query)))
+dato = st.session_state["connection"].execute(text(query))
 st.metric("Numero Agenzie saltavete:",dato.mappings().first()['numAgenzie'])
-#st.metric("Citta coperte:",0)
-#st.metric("Citta maggiornmente coperta:",0)
+
+query = "SELECT COUNT(DISTINCT Citta_Indirizzo) AS numCitta FROM AGENZIA"
+dato = st.session_state["connection"].execute(text(query))
+st.metric("Citta coperte:",dato.mappings().first()['numCitta'])
+
+query = "SELECT COUNT(DISTINCT CodA) AS numAgenzie FROM AGENZIA"
+dato = st.session_state["connection"].execute(text(query))
+st.metric("Citta maggiornmente coperta:",dato.mappings().first()['bestCitta'])
 
 
 
