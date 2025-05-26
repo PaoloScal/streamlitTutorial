@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 st.set_page_config(
-    page_title="La mia App",
+    page_title="Quaderno 4",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
@@ -12,4 +12,9 @@ st.set_page_config(
         'About': "# Corso di *Basi di Dati*"
     }
 )
-st.title("📈 La mia App")
+st.title("Laboratorio di Basi di dati")
+st.markdown("Quaderno 4")
+st.markdown(":red[Obiettivo]:")
+st.markdown("Creare un'applicazione web in Python (Streamlit) in grado di interagire con un database MySQL")
+st.markdown("in modo da eseguire interrogazioni in base alle interazioni dell'utente.")
+st.markdown("Paolo Scalise")            
