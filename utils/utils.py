@@ -19,7 +19,11 @@ def check_connection():
         st.session_state["connection"]=False
 
     if st.sidebar.button("Connettiti al Database"):
+<<<<<<< HEAD
         myconnection=connect_db(dialect="mysql+pymysql",username="root",password="mypassword",host="localhost",dbname="palestra")
+=======
+        myconnection=connect_db(dialect="mysql+pymysql",username="root",password="mypassword",host="localhost",dbname="hotel")
+>>>>>>> 0110c87403e63d63e8c7d3f18893a127fee74ba7
         if myconnection is not False:
             st.session_state["connection"]=myconnection
 
@@ -29,4 +33,8 @@ def check_connection():
 
     if st.session_state["connection"]:
         st.sidebar.success("Connesso al DB")
+<<<<<<< HEAD
         return True
+=======
+        return True
+>>>>>>> 0110c87403e63d63e8c7d3f18893a127fee74ba7
