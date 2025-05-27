@@ -5,7 +5,7 @@ from sqlalchemy import create_engine,text
 from utils.utils import *
 from datetime import *
 
-st.markdown("inserimento di nuovi Programmi")
+st.title(":orange[inserimento di nuovi Programmi:]")
 def get_list(attributo,tabella):
         query=f"SELECT DISTINCT {attributo} FROM {tabella}"
         result=st.session_state["connection"].execute(text(query))
@@ -33,7 +33,7 @@ Durata = st.slider("Seleziona la durata", 0,60)
 Sala = st.text_input("Sala Scelta:", placeholder = "S1")
 
 
-if st.button("VAI", type="primary"):
+if st.button("AGGIUNGI", type="primary"):
     if (CodFisc != '' and Giorno != '' and OraInizio != '' and Durata != '' and Sala != '' and CodC != ''):
         if (find_if_present("CodC","Giorno","Programma",CodC,Giorno) == 0):
             query = f"INSERT INTO Programma(CodFisc,Giorno,OraInizio,Durata,Sala,CodC) VALUES{CodFisc,Giorno,OraInizio.strftime('%HH:%mm'),str(Durata),Sala,CodC}"

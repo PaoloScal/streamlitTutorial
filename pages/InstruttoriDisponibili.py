@@ -4,7 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine,text
 from utils.utils import *
 
-st.subheader("Filtraggio Corsi")
+st.title(":blue[Filtraggio Istruttori:]")
 col1,col2=st.columns(2)
 if check_connection():
     

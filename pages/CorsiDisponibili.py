@@ -4,7 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine,text
 from utils.utils import *
 
-st.subheader("Filtraggio Corsi")
+st.title(":green[Filtraggio Corsi:]")
 col1,col2=st.columns(2)
 if check_connection():
     def get_list(attributo,tabella):
@@ -30,18 +30,25 @@ if check_connection():
     else:
         typestr = f"AND Corsi.Tipo = '{tipo}'"
 
-    LivelloList = get_list('Livello','Corsi')
-    liv= st.selectbox("A che livello di allenamento sei interessato?",LivelloList)
-    if (liv == ''):
-        livstr= ''
+    LivelloList = [1,2,3,4]
+    col1,col2=st.columns(2)
+    livmin = col1.selectbox("A che livello di allenamento minimo sei interessato?",LivelloList)
+    livmax = col2.selectbox("A che livello di allenamento massimo sei interessato?",LivelloList)
+    livstr= ''
+    if (livmin == ''):
+        livstr= livstr + ''
     else:
-        livstr = f"AND Corsi.Livello = '{liv}'"    
-     
+        livstr = livstr + f"AND Corsi.Livello >= '{livmin}'"    
+
+    if (livmax == ''):
+        livstr= livstr + ''
+    else:
+        livstr = livstr + f"AND Corsi.Livello <= '{livmax}'"   
 
     query = f"SELECT Programma.Giorno,Programma.OraInizio,Programma.Durata,Programma.Sala,CONCAT(Istruttore.Nome,' ',Istruttore.Cognome) AS NomeCognome,Istruttore.Email FROM Corsi,Istruttore,Programma WHERE Corsi.CodC = Programma.CodC  AND Programma.CodFisc = Istruttore.CodFisc {typestr} {livstr}"
     dato = st.session_state["connection"].execute(text(query))
     df = pd.DataFrame(dato)
-    if (dato == ''):
-        st.markdown("errore")
+    if df.empty:
+        st.markdown("Non ci sono corsi del genere")
     else:
         st.table(df)
