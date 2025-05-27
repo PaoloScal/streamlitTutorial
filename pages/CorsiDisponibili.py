@@ -15,11 +15,6 @@ if check_connection():
             result_list.append(row[attributo])
         return result_list
 
-
-    
-
-
-
     query = "SELECT COUNT(DISTINCT CodC) AS Num FROM Corsi "
     dato = st.session_state["connection"].execute(text(query))
     col1.metric("Numero Corsi Disponibili:",dato.mappings().first()['Num'])
