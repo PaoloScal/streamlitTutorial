@@ -14,7 +14,6 @@ st.set_page_config(
         'About': "# Corso di *Basi di Dati*"
     }
 )
-<<<<<<< HEAD
 st.title("Laboratorio di Basi di dati")
 st.markdown("Quaderno 4")
 st.markdown(":red[Obiettivo]:")
@@ -30,14 +29,3 @@ if check_connection():
     query = "SELECT Giorno, COUNT(*) AS NumeroLezioni FROM Programma GROUP BY Giorno"
     dato = pd.DataFrame(st.session_state["connection"].execute(text(query)))
     st.bar_chart(dato,x = "Giorno")
-=======
-st.sidebar.title("Benvenuto nel sistema gestione hotel")
-st.title(":red[Sistema Gestione Hotel]")
-if "connection" not in st.session_state.keys():
-    st.session_state["connection"]=False
-
-st.header("HOTEL MEGALUSSO 3000")
-st.image("images/hotel.png")
-
-check_connection()
->>>>>>> 0110c87403e63d63e8c7d3f18893a127fee74ba7
