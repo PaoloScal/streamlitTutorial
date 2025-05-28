@@ -27,8 +27,8 @@ if check_connection():
     query = f"SELECT * FROM Istruttore WHERE DataNascita >'{date_range[0]}' AND DataNascita <'{date_range[1]}' {Cognomestr}"
     dato = st.session_state["connection"].execute(text(query))
     df = pd.DataFrame(dato)
-    if (dato == ''):
-        st.markdown("errore")
+    if df.empty:
+        st.markdown("Non ci sono Istrutto del genere disponibili")
     else:
         for index, row in df.iterrows():
                 col1,col2,col3,col4,col5,col6=st.columns(6)
